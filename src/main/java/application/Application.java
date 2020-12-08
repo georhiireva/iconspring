@@ -11,6 +11,13 @@ public class Application {
 
         var person = context.getBean(Person.class);
         person.say();
+        person.talkWithOther("How are you?", new Person("Michael", 22, null));
+        try {
+            person.talkWithException();
+        } catch( Throwable exception) {
+
+        }
+
 
         context.close();
     }

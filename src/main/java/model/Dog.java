@@ -10,4 +10,9 @@ public class Dog extends Pet {
     public Dog(@Value("${dog.name}") String name) {
         super(name);
     }
+
+    @Override
+    public void say() {
+        System.out.println("I don't want to say like a usual pet!");
+    }
 }

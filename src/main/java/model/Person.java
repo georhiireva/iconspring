@@ -1,5 +1,6 @@
 package model;
 
+import jdk.jshell.spi.ExecutionControl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +16,7 @@ public class Person implements ISpeaker {
     private Pet _pet;
 
     @Autowired
-    public Person(@Value("${person.name}") String name, @Value("${person.age}") int age, @Qualifier("cat") Pet pet) {
+    public Person(@Value("${person.name}") String name, @Value("${person.age}") int age, @Qualifier("dog") Pet pet) {
         _name = name;
         _age = age;
         _pet = pet;
@@ -59,5 +60,15 @@ public class Person implements ISpeaker {
     public void say() {
         System.out.println(this.getClass() + " " + _name + " says: " + _pet.getName() + ", come here!");
         _pet.say();
+    }
+
+    @Override
+    public String talkWithOther(String in_message, Person otherPerson) {
+        return "Hey, " + otherPerson.getName() + ", you said, " + in_message + "?. Let's talk about it.";
+    }
+
+    @Override
+    public String talkWithException() throws Throwable {
+        throw new ExecutionControl.NotImplementedException("Person doesn't want to talk with undefined person!");
     }
 }

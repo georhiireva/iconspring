@@ -1,5 +1,6 @@
 package model;
 
+import jdk.jshell.spi.ExecutionControl;
 import util.Utils;
 
 public abstract class Pet implements ISpeaker {
@@ -27,5 +28,15 @@ public abstract class Pet implements ISpeaker {
         return "Pet{" +
                 "_name='" + _name + '\'' +
                 '}';
+    }
+
+    @Override
+    public String talkWithOther(String in_message, Person otherPerson) {
+        return null;
+    }
+
+    @Override
+    public String talkWithException() throws Throwable {
+        throw new ExecutionControl.NotImplementedException("Pet doesn't want to talk with undefined person!");
     }
 }
